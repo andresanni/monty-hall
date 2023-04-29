@@ -20,7 +20,7 @@ assignDoorListeners();
 
 function assignDoorContent(){
     
-    const randomNumber=Math.floor((Math.random()*3)+1);
+    const randomNumber=Math.floor((Math.random()*3));
     
 
     for(let i=0;i<=2;i++){        
@@ -38,7 +38,17 @@ function assignDoorContent(){
 
         doors.push(door);        
     }       
-        
+    
+    prizeDoorObject = doors[randomNumber];
+
+    console.group("----ASIGNACION INICIAL DE PUERTAS----");
+    console.log("NUMERO ALEATORIO:");
+    console.log(randomNumber);
+    console.log("ELEMENTO GANADOR:");
+    console.log(prizeDoorElement);
+    console.log("OBJETO GANADOR:");
+    console.log(prizeDoorObject);
+    console.groupEnd();
 }
 
 function assignDoorListeners(){
@@ -46,8 +56,8 @@ function assignDoorListeners(){
     doorElements.forEach((doorElement=>{
             doorElement.addEventListener('click',()=>{
 
-                const doorIndex = parseInt(doorElement.dataset.door); //Capturo el numero de puerta del html                
-                selectedDoorObject = doors[doorIndex]; //Capturo el objeto js de la puerta
+                const doorIndex = parseInt(doorElement.dataset.door); 
+                selectedDoorObject = doors[doorIndex]; 
 
                 selectedDoorObject.selected=true;
                 selectedDoorObject.avaiable=false;
@@ -59,11 +69,22 @@ function assignDoorListeners(){
                 p.innerText="Puerta seleccionada : " + (selectedDoorObject.number +1);
                 tableroElement.appendChild(p);
 
+                console.group("----SELECCION DE PUERTA INICIAL----");
+                console.log("PUERTA SELECCIONADA EN ELEMENTO HTML:");
+                console.log(selectedDoorElement);
+                console.log("PUERTA SELECCIONADA EN OBJETO JS:");
+                console.log(selectedDoorObject);
+                console.groupEnd();
+
+
+
                 secondInstance(selectedDoorObject);
                 
-            }//end of event listener
-            )//end of forEach
-    }))    
+            }
+            )
+    }));
+    
+    
 }
 
 
@@ -113,8 +134,9 @@ function thirdInstance(withChange){
         const targetDoorToChange = doors.find(door =>door.avaiable);
         selectedDoorElement =  document.querySelector(`[data-door="${targetDoorToChange.number}"]`);
         selectedDoorObject = targetDoorToChange;
-
-        if(selectedDoorObject.prize){
+    }
+    
+    if(selectedDoorObject.prize){
 
             let p = document.createElement("p");
             p.innerText="Has Ganado!"
@@ -131,7 +153,7 @@ function thirdInstance(withChange){
         
 
     
-}
+
 
 
 
