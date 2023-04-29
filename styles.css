@@ -1,0 +1,46 @@
+body
+{
+	background-color: darksalmon ;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+h1
+{
+	font-family: sans-serif;
+	color: white;
+	font-size: 60px;
+	font-family: 'Sigmar', cursive;
+	font-weight: 300;
+}
+
+#doors
+{
+	display: flex;
+	width: 700px;
+	justify-content: space-evenly;
+}
+.door
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor:pointer;
+}
+.selected {
+	border: 5px solid lightblue;
+  }
+h2
+{
+	font-family: sans-serif;
+	color: white;
+	font-size: 40px;
+	font-family: 'Sigmar', cursive;
+	font-weight: 300;
+}
+
+#doors img
+{
+	width:130px;
+}
