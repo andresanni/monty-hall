@@ -1,5 +1,6 @@
 const doorElements = document.querySelectorAll(".door");
 const tableroElement = document.getElementById("tablero");
+const gameContainerElement = document.getElementById("game-container");
 
 //Elementos html
 let selectedDoorElement;
@@ -14,7 +15,7 @@ let prizeDoorObject;
 const doors = [];
 
 assignDoorContent();
-assignDoorListeners();
+gameContainerElement.addEventListener("click", onDoorClick);
 
 function assignDoorContent() {
   const randomNumber = Math.floor(Math.random() * 3);
@@ -49,32 +50,31 @@ function assignDoorContent() {
   console.groupEnd();
 }
 
-function assignDoorListeners() {
-  doorElements.forEach((doorElement) => {
-    doorElement.addEventListener("click", () => {
-      const doorIndex = parseInt(doorElement.dataset.door);
-      selectedDoorObject = doors[doorIndex];
+function onDoorClick(evet) {
+  if (event.target.classList.contains("door")) {
+    const doorIndex = parseInt(event.target.dataset.door);
 
-      selectedDoorObject.selected = true;
-      selectedDoorObject.avaiable = false;
+    selectedDoorObject = doors[doorIndex];
 
-      doorElement.classList.add("selected");
-      selectedDoorElement = doorElement;
+    selectedDoorObject.selected = true;
+    selectedDoorObject.avaiable = false;
 
-      const p = document.createElement("p");
-      p.innerText = "Puerta seleccionada : " + (selectedDoorObject.number + 1);
-      tableroElement.appendChild(p);
+    event.target.classList.add("selected");
+    selectedDoorElement = event.target;
 
-      console.group("----SELECCION DE PUERTA INICIAL----");
-      console.log("PUERTA SELECCIONADA EN ELEMENTO HTML:");
-      console.log(selectedDoorElement);
-      console.log("PUERTA SELECCIONADA EN OBJETO JS:");
-      console.log(selectedDoorObject);
-      console.groupEnd();
+    const p = document.createElement("p");
+    p.innerText = "Puerta seleccionada : " + (selectedDoorObject.number + 1);
+    tableroElement.appendChild(p);
 
-      secondInstance(selectedDoorObject);
-    });
-  });
+    console.group("----SELECCION DE PUERTA INICIAL----");
+    console.log("PUERTA SELECCIONADA EN ELEMENTO HTML:");
+    console.log(selectedDoorElement);
+    console.log("PUERTA SELECCIONADA EN OBJETO JS:");
+    console.log(selectedDoorObject);
+    console.groupEnd();
+
+    secondInstance(selectedDoorObject);
+  }
 }
 
 function secondInstance(selectedDoor) {
